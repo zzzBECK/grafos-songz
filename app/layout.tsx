@@ -1,13 +1,13 @@
 // app/layout.tsx
+import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GraphProvider } from "@/hooks";
+import { DijkstraProvider } from "@/hooks/dijkstra";
 import { mockData } from "@/lib/mocks/songs"; // Import mockData
+import { mockData2 } from "@/lib/mocks/songs2";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/header";
-import { DijkstraProvider } from "@/hooks/dijkstra";
-import { mockData2 } from "@/lib/mocks/songs2";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,13 +35,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
-        <Header />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
+          <Header />
           <main className="py-20">
             <DijkstraProvider graph={mockData2}>
               <GraphProvider graph={mockData}>{children}</GraphProvider>
